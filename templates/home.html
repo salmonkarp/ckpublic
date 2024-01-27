@@ -4,35 +4,58 @@
 {% block title %}Home - {{ super() }}{% endblock %}
 
 {% block content %}
-<div class="container mt-4" id="home-grid">
-    <div class="row row-cols-2">
-      <div class="col-md-6 mb-4">
-        <a href="your-link-1" class="card" role="button">
-          <img src="static/images/card1.jpg" alt="Image 1" class="img-fluid">
-          <div class="card-title">Favorites</div>
-        </a>
-      </div>
-  
-      <div class="col-md-6 mb-4">
-        <a href="your-link-2" class="card" role="button">
-          <img src="static/images/card1.jpg" alt="Image 2" class="img-fluid">
-          <div class="card-title">Cookies</div>
-        </a>
-      </div>
-  
-      <div class="col-md-6 mb-4">
-        <a href="your-link-3" class="card" role="button">
-          <img src="static/images/card1.jpg" alt="Image 3" class="img-fluid">
-          <div class="card-title">Hampers</div>
-        </a>
-      </div>
-  
-      <div class="col-md-6 mb-4">
-        <a href="your-link-4" class="card" role="button">
-          <img src="static/images/card1.jpg" alt="Image 4" class="img-fluid">
-          <div class="card-title">Snacks</div>
-        </a>
-      </div>
+<link href="/static/home.css" rel="stylesheet">
+
+<div class="container mx-auto" id="home-about">
+    <h1 class="text-center">About Us</h1>
+    <p class="text-body" style="text-align: justify;">Cookies Kingdom in Surabaya delights taste buds with a royal selection of artisanal cookies. Nestled in a charming locale, we craft irresistible treats using premium ingredients and time-honored recipes. Our regal creations, from classic chocolate chip to exotic matcha-infused delights, promise a delectable journey for cookie connoisseurs. Indulge in the kingdom's sweet symphony, where each bite is a royal treat.</p>
+</div>
+
+<div class="container-fluid mb-3" id="home-grid">
+    <div class="row row-cols-2" id="home-row">
+        <div class="col-8"  id="home-col">
+            <img src="/static/images/card1.jpg" alt="Card 1" class="img-fluid option-img">
+        </div>
+        <div class="col-4" id="home-col-text">
+            <h2 class="text-lg">Our Favorites</h2>
+            <p class="text-sm">The best-selling products from our catalogue.</p>
+        </div>
     </div>
-  </div>
+</div>
+
+<div class="container-fluid mb-3" id="home-grid">
+    <div class="row row-cols-2" id="home-row">
+        <div class="col-4" id="home-col-text-left">
+            <h2 class="text-lg">Our Cookies</h2>
+            <p class="text-sm">Delicious cookies for all your needs.</p>
+        </div>
+        <div class="col-8"  id="home-col">
+            <img src="/static/images/card4.jpg" alt="Card 2" class="img-fluid option-img">
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mb-3" id="home-grid">
+    <div class="row row-cols-2" id="home-row">
+        <div class="col-8"  id="home-col">
+            <img src="/static/images/card2.jpg" alt="Card 3" class="img-fluid option-img">
+        </div>
+        <div class="col-4" id="home-col-text">
+            <h2 class="text-lg">Our Hampers</h2>
+            <p class="text-sm">Perfect for any festive season.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mb-3" id="home-grid">
+    <div class="row row-cols-2" id="home-row">
+        <div class="col-4" id="home-col-text-left">
+            <h2 class="text-lg">Snack Products</h2>
+            <p class="text-sm">Yummy snacks to fill your tummy.</p>
+        </div>
+        <div class="col-8"  id="home-col">
+            <img src="/static/images/card4.jpg" alt="Card 4" class="img-fluid option-img">
+        </div>
+    </div>
+</div>
 {% endblock %}
