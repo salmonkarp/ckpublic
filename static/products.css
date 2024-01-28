@@ -1,0 +1,41 @@
+.card-title .card-text{
+    color:black;
+}
+
+
+.tab-content{
+    margin-right: auto;
+}
+
+.card {
+width: 100%;
+height: 100%;
+}
+
+.product-col {
+height: 100%;
+}
+
+.row{
+    height:100%;
+}
+
+.carousel-inner .carousel-item{
+    max-height: 13em;
+}
+
+.carousel-inner img {
+    width: 100%;
+    height: auto;
+  }
+
+.card-body{
+    padding:0.7em;
+}
+
+
+@media (max-width: 768px) {
+    .carousel-inner .carousel-item{
+        max-height:8em;
+    }
+}

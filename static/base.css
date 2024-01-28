@@ -1,6 +1,18 @@
+@font-face {
+    font-family: 'merriweather';
+    src: url('fonts/merriweather.ttf') format('truetype'),
+}
+
+@font-face {
+    font-family: 'satisfy';
+    src: url('fonts/satisfy.ttf') format('truetype'),
+}
+
 body{
     background-image: url("images/paper_background.jpg");
+    font-family:'Arial';
 }
+
 #header-logo{
     max-height: 75px;
     margin-right: 20px;
@@ -16,25 +28,17 @@ body{
     object-fit: cover;
 }
 
-/* nav.navbar{
-    background-color: rgb(253, 245, 224);
-} */
 
 .nav-link{
     font-weight: 400;
     color:white;
-    font-size:larger
+    font-size:larger;
 }
 
 #footer-logo-1{
-    max-height:50px;
+    max-height:75px;
 }
-#footer-logo-2{
-    max-height:100px;
-}
-#footer-logo-3{
-    max-height:50px;
-}
+
 html, body {
     height: 100%;
     margin: 0;
@@ -55,5 +59,10 @@ html, body {
 }
 
 .section{
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
+
+.footer-text{
+    margin-top:1rem;
+}
+

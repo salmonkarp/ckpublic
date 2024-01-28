@@ -1,14 +1,20 @@
 /* END OF BASE.HTML */
 
+@font-face {
+    font-family: 'stylish';
+    src: url('fonts/stylish.ttf') format('truetype'),
+}
+
 #home-grid{
-    margin-top:2rem;
-    background-color: rgb(253, 245, 224);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    margin-bottom: 100px;
+    background-color: rgb(246, 239, 220);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 #home-about{
-    margin-top:2rem;
-    max-width:700px;
+    margin-top:100px;
+    margin-bottom:80px;
+    max-width:600px;
 }
 
 h1.text-center{
@@ -19,25 +25,38 @@ h1.text-center{
 
 p.text-body{
     margin-bottom:3rem;
+    text-align: justify;
+    font-size:medium
 }
 
-.option-img{
+.option-img-left{
     height:100%;
     width:100%;
     object-fit: cover;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
+.option-img-right{
+    height:100%;
+    width:100%;
+    object-fit: cover;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
 }
 
 #home-col{
     padding-left: 0px;
-    max-height: 13rem;
+    padding-right:0px;
+    max-height: 15rem;
 }
 
 #home-col-text{
     display:flex;
     flex-direction: column;
     justify-content: center;
-    padding-left:0.5rem;
     padding-top:1rem;
+    padding-left:1rem;
     padding-right:1rem;
 }
 
@@ -46,8 +65,45 @@ p.text-body{
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
-    padding-left:0.5rem;
+    padding-left:1rem;
     padding-top:1rem;
     padding-right:1rem;
     text-align: end;
+}
+
+#home-about h1{
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    /* font-weight: 600; */
+    font-family: 'satisfy';
+}
+
+.text-lg{
+    /* font-weight:800; */
+    font-size:1.4rem;
+}
+.text-sm{
+    font-size:1rem;
+}
+
+#home-col{
+    overflow: hidden;
+    position: relative;
+}
+
+#home-col img{
+    transition: transform 0.3s ease-in-out;
+}
+
+#home-col:hover img{
+    transform: scale(1.05);
+}
+
+a{
+    text-decoration: none;
+    color:black
+}
+
+a:hover{
+    color:rgb(116, 115, 115)
 }

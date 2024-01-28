@@ -13,41 +13,42 @@
       <!-- Header -->
       <div class="section">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark section">
-            <div class="container">
-              <img src="/static/images/logo_dark.png" alt="Cookies Kingdom Logo" class="img-fluid" id="header-logo">
-              <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#header" aria-controls="header" aria-label="Expand Navigation">
-                <div class="navbar-toggler-icon"></div>
-              </button>
-              <div class="collapse navbar-collapse" id="header">
-                <ul class="navbar-nav">
-                  <li class="navbar-item">
-                    <a href="#about" class="nav-link">About</a>
-                  </li>
-                  <li class="navbar-item">
-                    <a href="/products" class="nav-link">Products</a>
-                  </li>
-                  <li class="navbar-item">
-                    <a href="/wheretobuy" class="nav-link">Where to Buy</a>
-                  </li>
-                  <li class="navbar-item">
-                    <a href="/contactus" class="nav-link">Contact Us</a>
-                  </li>
-                </ul>
-              </div>
+            <div class="container d-flex justify-content-between align-items-center">
+                <img src="/static/images/logo_dark.png" alt="Cookies Kingdom Logo" class="img-fluid" id="header-logo">
+                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#header" aria-controls="header" aria-label="Expand Navigation">
+                    <div class="navbar-toggler-icon"></div>
+                </button>
+                <div class="collapse navbar-collapse" id="header">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="navbar-item">
+                            <a href="/#about" class="nav-link">Home</a>
+                        </li>
+                        <li class="navbar-item">
+                            <a href="/products" class="nav-link">Products</a>
+                        </li>
+                        <li class="navbar-item">
+                            <a href="/wheretobuy" class="nav-link">Where to Buy</a>
+                        </li>
+                        <li class="navbar-item">
+                            <a href="/contactus" class="nav-link">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
       </div>
+    
       
       <!-- Image Carousel -->
       <div class="section">
         <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                {% for image_url in cover_image_urls %}
-                    <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
-                        <img src="{{ image_url }}" class="d-block w-100 img-fluid" alt="Slide {{ loop.index }}">
-                    </div>
-                {% endfor %}
-            </div>
+          <div class="carousel-inner">
+            {% for image_url in cover_image_urls %}
+                <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                    <img src="{{ image_url }}" class="d-block w-100 img-fluid" alt="Slide {{ loop.index }}" data-bs-toggle="modal" data-bs-target="#imageModal" data-src="{{ image_url }}">
+                </div>
+            {% endfor %}
+          </div>
         
             <!-- Add carousel indicators -->
             <ol class="carousel-indicators">
@@ -74,7 +75,7 @@
       <footer class="bg-dark text-light p-3 footer mt-3">
         <div class="container">
             <div class="row justify-content-between align-items-center">
-                <div class="col-md-9">
+                <div class="col-md-9 footer-text">
                     <!-- Left side content: Information -->
                     <h3>Cookies Kingdom</h3>
                     <p>Raya Wiguna Tengah 40 Surabaya</p>
@@ -82,7 +83,7 @@
                 </div>
                 <div class="col-md-3 d-flex align-items-center justify-content-end">
                     <!-- Right side content: Logos -->
-                    <img src="/static/images/logo.png" alt="Logo 1" class="me-3 img-fluid" id="footer-logo-1">
+                    <img src="/static/images/logo_dark.png" alt="Logo 1" class="me-3 img-fluid" id="footer-logo-1">
                 </div>
             </div>
         </div>
@@ -92,11 +93,30 @@
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
       
+
+      <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+              <img src="" id="modalImage" class="img-fluid" alt="Full Image">
+            </div>
+          </div>
+        </div>
+      </div>
   </body>
   <script>
      if ('ontouchstart' in document.documentElement) {
       document.body.classList.add('touch');
     }
+    var myModal = new bootstrap.Modal(document.getElementById('imageModal'));
+    var modalImage = document.getElementById('modalImage');
+
+    // When the modal is about to be shown
+    myModal._element.addEventListener('show.bs.modal', function (event) {
+      var button = event.relatedTarget; // Button that triggered the modal
+      var imageSrc = button.getAttribute('data-src'); // Extract info from data-* attributes
+      modalImage.src = imageSrc; // Set the image source
+    });
   </script>
   
 </html>

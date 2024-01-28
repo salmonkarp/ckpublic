@@ -1,0 +1,279 @@
+<!-- products.html -->
+{% extends 'base.html' %}
+
+{% block title %}Products - {{ super() }}{% endblock %}
+
+{% block content %}
+<link href="/static/products.css" rel="stylesheet">
+<div class="container mt-4">
+
+    <!-- Switcher Buttons -->
+    <div class="container d-flex justify-content-center">
+        <div class="btn-group nav nav-tabs" role="group" aria-label="Product Switcher" id="productTabs">
+            <button type="button" class="btn btn-dark active" data-bs-toggle="tab" data-bs-target="#cookies">Cookies</button>
+            <button type="button" class="btn btn-dark " data-bs-toggle="tab" data-bs-target="#hampers">Hampers</button>
+            <button type="button" class="btn btn-dark " data-bs-toggle="tab" data-bs-target="#snacks">Snacks</button>
+            <button type="button" class="btn btn-dark " data-bs-toggle="tab" data-bs-target="#signatures">Signatures</button>
+        </div>
+    </div>
+
+    <!-- Product Display -->
+    <div class="tab-content mt-3">
+        <!-- Cookies -->
+        <div class="tab-pane fade show active" id="cookies">
+            <div class="row row-cols-2 row-cols-lg-4 g-4">
+                {% for product in products_list %}
+                    <!-- Product Card -->
+                    <div class="col product-col">
+                        <div class="card">
+                            <!-- Carousel -->
+                            <div id="carousel{{ product.id }}" class="carousel slide" data-bs-ride="carousel">
+                                <!-- Carousel Inner -->
+                                <div class="carousel-inner">
+                                    {% if (product.image_url | length)  > 0 %}
+                                        {% for image in product.image_url %}
+                                            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                                                <img src="{{ image }}" class="card-img-top" alt="Product Image">
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <div class="carousel-item active">
+                                            <img src="/static/images/product_image_empty.png" class="img-fluid card-img-top" alt="Product Image">
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                {% if (product.image_url | length)  > 1 %}
+                                    <!-- Carousel Controls -->
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ product.id }}" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ product.id }}" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                {% endif %}
+                            </div>
+                            <!-- Product Details -->
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                                {% if product.description %}
+                                    <p class="card-text">{{ product.description }}</p>
+                                {% else %}
+                                    <p></p>
+                                {% endif %}
+                                {% if product.price %}
+                                    <p class="card-text"><strong>{{ product.price | format_currency}}</strong></p>
+                                {% else %}
+                                    <p></p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Hampers -->
+        <div class="tab-pane fade" id="hampers">
+            <div class="row row-cols-2 row-cols-lg-4 g-4">
+                {% for product in hampers_list %}
+                    <!-- Product Card -->
+                    <div class="col product-col">
+                        <div class="card">
+                            <!-- Carousel -->
+                            <div id="carousel{{ product.id }}" class="carousel slide" data-bs-ride="carousel">
+                                <!-- Carousel Inner -->
+                                <div class="carousel-inner">
+                                    {% if (product.image_url | length)  > 0 %}
+                                        {% for image in product.image_url %}
+                                            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                                                <img src="{{ image }}" class="card-img-top" alt="Product Image">
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <div class="carousel-item active">
+                                            <img src="/static/images/product_image_empty.png" class="img-fluid card-img-top" alt="Product Image">
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                {% if (product.image_url | length)  > 1 %}
+                                    <!-- Carousel Controls -->
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ product.id }}" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ product.id }}" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                {% endif %}
+                            </div>
+                            <!-- Product Details -->
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                                {% if product.description %}
+                                    <p class="card-text">{{ product.description }}</p>
+                                {% else %}
+                                    <p></p>
+                                {% endif %}
+                                {% if product.price %}
+                                    <p class="card-text"><strong>{{ product.price | format_currency}}</strong></p>
+                                {% else %}
+                                    <p></p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Hampers -->
+        <div class="tab-pane fade" id="snacks">
+            <div class="row row-cols-2 row-cols-lg-4 g-4">
+                {% for product in snacks_list %}
+                    <!-- Product Card -->
+                    <div class="col product-col">
+                        <div class="card">
+                            <!-- Carousel -->
+                            <div id="carousel{{ product.id }}" class="carousel slide" data-bs-ride="carousel">
+                                <!-- Carousel Inner -->
+                                <div class="carousel-inner">
+                                    {% if (product.image_url | length)  > 0 %}
+                                        {% for image in product.image_url %}
+                                            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                                                <img src="{{ image }}" class="card-img-top" alt="Product Image">
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <div class="carousel-item active">
+                                            <img src="/static/images/product_image_empty.png" class="img-fluid card-img-top" alt="Product Image">
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                {% if (product.image_url | length)  > 1 %}
+                                    <!-- Carousel Controls -->
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ product.id }}" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ product.id }}" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                {% endif %}
+                            </div>
+                            <!-- Product Details -->
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                                {% if product.description %}
+                                    <p class="card-text">{{ product.description }}</p>
+                                {% else %}
+                                    <p></p>
+                                {% endif %}
+                                {% if product.price %}
+                                    <p class="card-text"><strong>{{ product.price | format_currency}}</strong></p>
+                                {% else %}
+                                    <p></p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Signature -->
+        <div class="tab-pane fade" id="signatures">
+            <div class="row row-cols-2 row-cols-lg-4 g-4">
+                {% for product in signatures_list %}
+                    <!-- Product Card -->
+                    <div class="col product-col">
+                        <div class="card">
+                            <!-- Carousel -->
+                            <div id="carousel{{ product.id }}" class="carousel slide" data-bs-ride="carousel">
+                                <!-- Carousel Inner -->
+                                <div class="carousel-inner">
+                                    {% if (product.image_url | length)  > 0 %}
+                                        {% for image in product.image_url %}
+                                            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                                                <img src="{{ image }}" class="card-img-top" alt="Product Image">
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <div class="carousel-item active">
+                                            <img src="/static/images/product_image_empty.png" class="img-fluid card-img-top" alt="Product Image">
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                {% if (product.image_url | length)  > 1 %}
+                                    <!-- Carousel Controls -->
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ product.id }}" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ product.id }}" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                {% endif %}
+                            </div>
+                            <!-- Product Details -->
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                                {% if product.description %}
+                                    <p class="card-text">{{ product.description }}</p>
+                                {% else %}
+                                    <p></p>
+                                {% endif %}
+                                {% if product.price %}
+                                    <p class="card-text"><strong>{{ product.price | format_currency}}</strong></p>
+                                {% else %}
+                                    <p></p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        // Retrieve 'option' value from the request URL
+        const optionValue = "{{ request.args.get('page') }}";
+
+        // If 'option' is not null and exists in the tab buttons, activate the corresponding tab
+        if (optionValue) {
+            const tabButtons = document.querySelectorAll('#productTabs button');
+            const tabContents = document.querySelectorAll('.tab-pane'); // Adjust the selector based on your actual HTML structure
+
+            // Deactivate all tabs and buttons
+            tabButtons.forEach((button) => {
+                button.classList.remove('active');
+            });
+            tabContents.forEach((tabContent) => {
+                tabContent.classList.remove('active');
+            });
+
+            // Activate the desired tab and button
+            const activeButton = document.querySelector(`[data-bs-target="#${optionValue}"]`);
+            const activeTabContent = document.getElementById(optionValue);
+
+            if (activeButton) {
+                activeButton.classList.add('active');
+            }
+
+            if (activeTabContent) {
+                activeTabContent.classList.add('show');
+                activeTabContent.classList.add('active');
+            }
+        }
+    });
+    </script>
+    
+</div>
+
+{% endblock %}
