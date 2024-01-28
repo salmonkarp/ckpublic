@@ -99,8 +99,8 @@ def get_all_cover_image_urls():
 def process_image(image_path):
     img = Image.open(image_path)
     desired_quality = 50
-    
-    processed_image_path = f"static/processed/processed_{image_path.split('\\')[-1]}"
+    updated_path = image_path.split('\\')[-1]
+    processed_image_path = f"static/processed/processed_{updated_path}"
     img.save(processed_image_path, format='JPEG', quality=desired_quality)
     return processed_image_path
 
