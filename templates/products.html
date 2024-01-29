@@ -9,11 +9,11 @@
 
     <!-- Switcher Buttons -->
     <div class="container d-flex justify-content-center">
-        <div class="btn-group nav nav-tabs" role="group" aria-label="Product Switcher" id="productTabs">
+        <div class="btn-group nav nav-tabs flex-wrap" role="group" aria-label="Product Switcher" id="productTabs">
             <button type="button" class="btn btn-dark active" data-bs-toggle="tab" data-bs-target="#cookies">Cookies</button>
-            <button type="button" class="btn btn-dark " data-bs-toggle="tab" data-bs-target="#hampers">Hampers</button>
-            <button type="button" class="btn btn-dark " data-bs-toggle="tab" data-bs-target="#snacks">Snacks</button>
-            <button type="button" class="btn btn-dark " data-bs-toggle="tab" data-bs-target="#signatures">Signatures</button>
+            <button type="button" class="btn btn-dark" data-bs-toggle="tab" data-bs-target="#hampers">Hampers</button>
+            <button type="button" class="btn btn-dark" data-bs-toggle="tab" data-bs-target="#snacks">Snacks</button>
+            <button type="button" class="btn btn-dark" data-bs-toggle="tab" data-bs-target="#signatures">Signatures</button>
         </div>
     </div>
 
@@ -29,15 +29,15 @@
                             <!-- Carousel -->
                             <div id="carousel{{ product.id }}" class="carousel slide" data-bs-ride="carousel">
                                 <!-- Carousel Inner -->
-                                <div class="carousel-inner">
+                                <div class="carousel-inner" id="p">
                                     {% if (product.image_url | length)  > 0 %}
                                         {% for image in product.image_url %}
-                                            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                                            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}" id="p">
                                                 <img src="{{ image }}" class="card-img-top" alt="Product Image">
                                             </div>
                                         {% endfor %}
                                     {% else %}
-                                        <div class="carousel-item active">
+                                        <div class="carousel-item active" id="p">
                                             <img src="/static/images/product_image_empty.png" class="img-fluid card-img-top" alt="Product Image">
                                         </div>
                                     {% endif %}
@@ -84,15 +84,15 @@
                             <!-- Carousel -->
                             <div id="carousel{{ product.id }}" class="carousel slide" data-bs-ride="carousel">
                                 <!-- Carousel Inner -->
-                                <div class="carousel-inner">
+                                <div class="carousel-inner" id="p">
                                     {% if (product.image_url | length)  > 0 %}
                                         {% for image in product.image_url %}
-                                            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                                            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}" id="p">
                                                 <img src="{{ image }}" class="card-img-top" alt="Product Image">
                                             </div>
                                         {% endfor %}
                                     {% else %}
-                                        <div class="carousel-item active">
+                                        <div class="carousel-item active" id="p">
                                             <img src="/static/images/product_image_empty.png" class="img-fluid card-img-top" alt="Product Image">
                                         </div>
                                     {% endif %}
@@ -139,15 +139,15 @@
                             <!-- Carousel -->
                             <div id="carousel{{ product.id }}" class="carousel slide" data-bs-ride="carousel">
                                 <!-- Carousel Inner -->
-                                <div class="carousel-inner">
+                                <div class="carousel-inner" id="p">
                                     {% if (product.image_url | length)  > 0 %}
                                         {% for image in product.image_url %}
-                                            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                                            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}" id="p">
                                                 <img src="{{ image }}" class="card-img-top" alt="Product Image">
                                             </div>
                                         {% endfor %}
                                     {% else %}
-                                        <div class="carousel-item active">
+                                        <div class="carousel-item active" id="p">
                                             <img src="/static/images/product_image_empty.png" class="img-fluid card-img-top" alt="Product Image">
                                         </div>
                                     {% endif %}
@@ -194,15 +194,15 @@
                             <!-- Carousel -->
                             <div id="carousel{{ product.id }}" class="carousel slide" data-bs-ride="carousel">
                                 <!-- Carousel Inner -->
-                                <div class="carousel-inner">
+                                <div class="carousel-inner" id="p">
                                     {% if (product.image_url | length)  > 0 %}
                                         {% for image in product.image_url %}
-                                            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                                            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}" id="p">
                                                 <img src="{{ image }}" class="card-img-top" alt="Product Image">
                                             </div>
                                         {% endfor %}
                                     {% else %}
-                                        <div class="carousel-item active">
+                                        <div class="carousel-item active" id="p">
                                             <img src="/static/images/product_image_empty.png" class="img-fluid card-img-top" alt="Product Image">
                                         </div>
                                     {% endif %}
@@ -242,15 +242,12 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-        // Retrieve 'option' value from the request URL
         const optionValue = "{{ request.args.get('page') }}";
-
-        // If 'option' is not null and exists in the tab buttons, activate the corresponding tab
-        if (optionValue) {
+        console.log(optionValue)
+        if (optionValue !== 'None') {
             const tabButtons = document.querySelectorAll('#productTabs button');
-            const tabContents = document.querySelectorAll('.tab-pane'); // Adjust the selector based on your actual HTML structure
+            const tabContents = document.querySelectorAll('.tab-pane');
 
-            // Deactivate all tabs and buttons
             tabButtons.forEach((button) => {
                 button.classList.remove('active');
             });
@@ -258,7 +255,7 @@
                 tabContent.classList.remove('active');
             });
 
-            // Activate the desired tab and button
+
             const activeButton = document.querySelector(`[data-bs-target="#${optionValue}"]`);
             const activeTabContent = document.getElementById(optionValue);
 
