@@ -12,7 +12,7 @@ def get_image_url(product_name, images_folder):
     for filename in os.listdir(images_folder):
         if filename.startswith(product_name + '@') and 'processed' not in filename:
             images_url_array.append('static/images/' + filename) 
-    return images_url_array
+    return sorted(images_url_array)
 
 #process all data from workbook before app is running
 def process_excel_file():
