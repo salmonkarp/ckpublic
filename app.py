@@ -198,7 +198,7 @@ def contactus():
         except Exception as e:
             print(e)
             response = {
-                'script': f'alert("Error sending email: {str(e)}");'
+                'script': f'alert("Error sending message. If this persists, contact garyaxelmuliyono@gmail.com");'
             }
             return jsonify(response)
 
