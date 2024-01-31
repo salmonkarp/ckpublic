@@ -7,10 +7,11 @@
 
 .location{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     padding-left:0.5em;
     padding-right:0.5em;
-    height:200px;
+    height:500px;
 }
 .locations-header{
     margin-top:2em;
