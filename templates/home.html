@@ -11,7 +11,7 @@
     <p class="text-body">Cookies Kingdom in Surabaya delights taste buds with a royal selection of artisanal cookies. Nestled in a charming locale, we craft irresistible treats using premium ingredients and time-honored recipes. Our regal creations, from classic chocolate chip to exotic matcha-infused delights, promise a delectable journey for cookie connoisseurs. Indulge in the kingdom's sweet symphony, where each bite is a royal treat.</p>
 </div>
 
-<div class="container-fluid" id="home-grid">
+<div class="container-fluid" id="home-grid-b1">
     <a href="/products?page=signatures">
         <div class="row row-cols-2" id="home-row">
             <div class="col-8"  id="home-col">
@@ -25,7 +25,7 @@
     </a>
 </div>
 
-<div class="container-fluid" id="home-grid">
+<div class="container-fluid" id="home-grid-b2">
     <a href="/products?page=cookies">
         <div class="row row-cols-2" id="home-row">
             <div class="col-4" id="home-col-text-left">
@@ -39,7 +39,7 @@
     </a>
 </div>
 
-<div class="container-fluid" id="home-grid">
+<div class="container-fluid" id="home-grid-b1">
     <a href="/products?page=hampers">
         <div class="row row-cols-2" id="home-row">
             <div class="col-8"  id="home-col">
@@ -53,7 +53,7 @@
     </a>
 </div>
 
-<div class="container-fluid" id="home-grid">
+<div class="container-fluid" id="home-grid-b2">
     <a href="/products?page=snacks">
         <div class="row row-cols-2" id="home-row">
             <div class="col-4" id="home-col-text-left">
@@ -66,4 +66,45 @@
         </div>
     </a>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Function to check if an element is in the viewport
+        function isInViewport(element) {
+            var rect = element.getBoundingClientRect();
+            console.log(rect.bottom, window.innerHeight);
+            return (
+                rect.top >= 0 &&
+                rect.bottom <= window.innerHeight
+            );
+        }
+
+        // Function to handle scroll and resize events
+        function handleViewportEvents() {
+            var homeGrids = document.querySelectorAll("#home-grid-b1");
+            var homeGrids2 = document.querySelectorAll("#home-grid-b2");
+
+            homeGrids.forEach(function (grid) {
+                if (isInViewport(grid) && !grid.classList.contains("show")) {
+                    grid.classList.add("show");
+                }
+            });
+
+            homeGrids2.forEach(function (grid2) {
+                console.log(isInViewport(grid2));
+                if (isInViewport(grid2) && !grid2.classList.contains("show")) {
+                    grid2.classList.add("show");
+                }
+            });
+        }
+
+        // Attach scroll and resize event listeners
+        window.addEventListener("scroll", handleViewportEvents);
+        window.addEventListener("resize", handleViewportEvents);
+
+        // Trigger the handleViewportEvents function once on page load
+        handleViewportEvents();
+    });
+</script>
+
 {% endblock %}
