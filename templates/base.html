@@ -49,7 +49,7 @@
           <div class="carousel-inner">
             {% for image_url in cover_image_urls %}
                 <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
-                    <img src="{{ image_url }}" class="d-block w-100 img-fluid" alt="Slide {{ loop.index }}" data-bs-toggle="modal" data-bs-target="#imageModal" data-src="{{ image_url }}">
+                    <img src="{{ image_url }}" class="d-block w-100 img-fluid" alt="Slide {{ loop.index }}" data-bs-toggle="modal" data-bs-target="#imageModal" data-src="{{ image_url }}" loading="lazy">
                 </div>
             {% endfor %}
           </div>
