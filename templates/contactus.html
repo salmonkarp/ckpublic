@@ -1,0 +1,67 @@
+<!-- wheretobuy.html -->
+{% extends 'base.html' %}
+
+{% block title %}Products - {{ super() }}{% endblock %}
+
+{% block content %}
+<link href="/static/contactus.css" rel="stylesheet">
+
+<div class="container mt-1 mb-5 mx-auto" style="max-width:400p" id="contact">
+    <!-- Contact Form -->
+    <div class="container mt-5 mx-auto" style="max-width:400px" id="contact">
+      <h2 style="text-align: center;">Contact Us</h2>
+      <form action="/contactus" method="post" enctype="multipart/form-data" id="contact-form">
+        <div class="mb-3 form-floating">
+          <input type="text" class="form-control" id="fullName" placeholder="Your Full Name" name="fullName" required>
+          <label for="fullName" class="form-label">Full Name</label>
+        </div>
+        <div class="mb-3 form-floating">
+          <input type="email" class="form-control" id="email" placeholder="Your Email" name="email" required>
+          <label for="email" class="form-label">Email Address</label>
+        </div>
+        <div class="mb-3">
+          <textarea class="form-control" id="message" rows="5" placeholder="Your Message" name="message"></textarea>
+        </div>
+        <div class="submit-cont">
+          <input type="submit" class="btn btn-dark mx-auto" id="submitBtn"></input>
+        </div>
+        
+      </form>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var submitBtn = document.getElementById('submitBtn');
+        var contactForm = document.getElementById('contact-form');
+
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent the default form submission
+
+            // Disable the submit button
+            submitBtn.disabled = true;
+
+            // Use Fetch API to submit the form asynchronously
+            fetch('/contactus', {
+                method: 'POST',
+                body: new FormData(event.target),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Execute the script received from the server
+                var scriptElement = document.createElement('script');
+                scriptElement.innerHTML = data.script;
+                document.head.appendChild(scriptElement);
+
+                // Re-enable the submit button after successful submission
+                submitBtn.disabled = false;
+
+                // Show an alert when the button is clicked
+                submitBtn.addEventListener('click', function() {
+                    alert('Button Clicked!');
+                });
+            });
+        });
+    });
+</script>
+
+{% endblock %}

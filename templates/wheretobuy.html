@@ -1,0 +1,76 @@
+<!-- wheretobuy.html -->
+{% extends 'base.html' %}
+
+{% block title %}Products - {{ super() }}{% endblock %}
+
+{% block content %}
+<link href="/static/wheretobuy.css" rel="stylesheet">
+
+<!-- Socials -->
+<div class="container d-flex flex-column align-items-center justify-content-center online-container">
+    <h2 class="mb-4"><strong>Shop Our Products Online</strong></h2>
+    <div class="d-flex justify-content-center button-container">
+      <a class="rounded-button mx-2" href="https://api.whatsapp.com/send/?phone=628123145489&text&type=phone_number&app_absent=0"><img src="/static/online/whatsapp.png" alt="Whatsapp Shop" class="online"></a>
+      <a class="rounded-button mx-2" href="https://grab.onelink.me/2695613898?pid=inappsharing&c=IDGFSTI00000hwz&is_retargeting=true&af_dp=grab%3A%2F%2Fopen%3FscreenType%3DGRABFOOD%26sourceID%3DA4pcqCZkS4%26merchantIDs%3DIDGFSTI00000hwz&af_force_deeplink=true&af_web_dp=https%3A%2F%2Fwww.grab.com%2"><img src="/static/online/grab.png" alt="GrabFood" class="online"></a>
+      <a class="rounded-button mx-2" href="https://gofood.co.id/surabaya/restaurant/cookies-kingdom-rungkut-78e755a2-26b3-438b-ab27-0b5a805a9818"><img src="/static/online/gojek.png" alt="GoFood" class="online"></a>
+      <a class="rounded-button mx-2" href="https://www.tokopedia.com/cookieskingdomsu?utm_source=Android&utm_medium=Share&utm_campaign=Shop%20Share&_branch_match_id=1266228313108914198&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXL8nPzi9ITclM1MvJzMvWDzfNz7AoTAlJT0oCAG0pZjciAAAA"><img src="/static/online/tokopedia.png" alt="Tokopedia" class="online"></a>
+      <a class="rounded-button mx-2" href="https://shopee.co.id/cookies.kingdom"><img src="/static/online/shopee.png" alt="Shopee" class="online"></a>
+    </div>
+</div>
+
+<!-- Main Location -->
+<div class="main-location-container">
+    <div class="row">
+        <div class="col-md-5 cl-left">
+            <p>You can also visit us at...</p>
+            <h2><strong>Raya Wiguna Tengah 40 Surabaya</strong></h2>
+            <p>Opening Hours: <br>
+                Monday - Friday: 08:00 - 17:00 WIB <br>
+                Saturday: 08:00 - 13:00 WIB <br>
+                Sunday: Closed </p>
+        </div>
+        <div class="col-md-7 cl-right">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.1598566127145!2d112.79743877520866!3d-7.335937672156132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fb4f83b2edd1%3A0xd4c6d183147aa7!2sCookies%20Kingdom!5e0!3m2!1sen!2sus!4v1706614257686!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="map"></iframe>
+        </div>
+    </div>
+</div>
+
+<!-- Other Locations -->
+<h2 class="locations-header"><strong>Our products are also available at...</strong></h2>
+<div class="container location-container">
+    <div class="row">
+
+      <div class="col-md-4 col-6 location">
+        <img src="/static/locations/ranch_logo.png" alt="Ranch Market Logo" class="img-fluid loc">
+      </div>
+
+      <div class="col-md-4 col-6 location">
+        <img src="/static/locations/burudy_logo.png" alt="Bu Rudy Logo" class="img-fluid loc">
+      </div>
+
+      <div class="col-md-4 col-6 location">
+        <img src="/static/locations/lotte_logo.png" alt="Lotte Logo" class="img-fluid loc">
+      </div>
+
+      <div class="col-md-4 col-6 location">
+        <img src="/static/locations/hokky_logo.png" alt="Hokky Logo" class="img-fluid loc">
+      </div>
+
+      <div class="col-md-4 col-6 location">
+        <img src="/static/locations/chicco_logo.png" alt="Chicco Logo" class="img-fluid loc">
+      </div>
+
+      <div class="col-md-4 col-6 location">
+        <img src="/static/locations/bilka_logo.png" alt="Bilka Logo" class="img-fluid loc">
+      </div>
+
+      <div class="col-md-4 col-6 location">
+        <img src="/static/locations/pelangi_logo.png" alt="Pelangi Logo" class="img-fluid loc">
+      </div>
+
+      <div class="col-md-4 col-6 location">
+        <img src="/static/locations/kitto_logo.png" alt="Kitto Logo" class="img-fluid loc">
+      </div>
+    </div>
+  </div>
+{% endblock %}

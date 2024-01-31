@@ -1,0 +1,26 @@
+.location-container{
+    padding-left: 3em;
+    padding-right: 3em;
+    margin-bottom:3em;
+    
+}
+
+.location{
+    display: flex;
+    justify-content: center;
+    padding-left:0.5em;
+    padding-right:0.5em;
+    height:200px;
+}
+.locations-header{
+    margin-top:2em;
+    text-align: center;
+    padding-left:2em;
+    padding-right: 2em;
+    margin-bottom:1em;
+}
+.loc{
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
+}

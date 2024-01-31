@@ -1,4 +1,5 @@
 from flask import *
+from flask_mail import Mail, Message
 from openpyxl import load_workbook
 from PIL import Image
 import os
@@ -9,7 +10,7 @@ import os
 def get_image_url(product_name, images_folder):
     images_url_array = []
     for filename in os.listdir(images_folder):
-        if filename.startswith(product_name + '@'):
+        if filename.startswith(product_name + '@') and 'processed' not in filename:
             images_url_array.append('static/images/' + filename) 
     return images_url_array
 
@@ -18,16 +19,18 @@ def process_excel_file():
     excel_file_path = 'static/products.xlsx'
     images_folder_path = 'static/images'
     wb = load_workbook(excel_file_path)
+    
     sheet = wb['Products']
     products_list = []
     counter = 0
     for row in sheet.iter_rows(min_row=2, values_only=True):
-        product_name, price, description = row
+        product_name, full_price, half_price, description, *extra_elements = row
         image_url = get_image_url(product_name, images_folder_path)
         product_dict = {
             'id':counter,
             'name': product_name,
-            'price': price,
+            'full_price': full_price,
+            'half_price': half_price,
             'description': description,
             'image_url': image_url
         }
@@ -90,19 +93,24 @@ def get_all_cover_image_urls():
     image_urls = []
 
     for filename in os.listdir(cover_folder_path):
-        if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')):
+        if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')) and 'processed' not in filename:
             image_urls.append(cover_folder_path + '/' + filename)
 
     return image_urls
 
 #process too high quality of an image
 def process_image(image_path):
-    img = Image.open(image_path)
-    desired_quality = 50
-    updated_path = image_path.split('\\')[-1]
-    processed_image_path = f"static/processed/processed_{updated_path}"
-    img.save(processed_image_path, format='JPEG', quality=desired_quality)
-    return processed_image_path
+    updated_path = image_path.split('.')[0]
+    ftype = image_path.split('.')[1]
+    processed_image_path = f"{updated_path}_processed.{ftype}"
+    try:
+        img = Image.open(processed_image_path)
+        return processed_image_path
+    except:
+        img = Image.open(image_path)
+        desired_quality = 50
+        img.save(processed_image_path, format='JPEG', quality=desired_quality)
+        return processed_image_path
 
 #jinja format currency
 def format_currency(value):
@@ -118,6 +126,15 @@ app = Flask(__name__)
 cover_image_urls = get_all_cover_image_urls()
 products_list, hampers_list, snacks_list, signatures_list = process_excel_file()
 app.jinja_env.filters['format_currency'] = format_currency
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_USERNAME'] = 'garyaxelmuliyono@gmail.com'
+app.config['MAIL_PASSWORD'] = "LOL"
+app.config['MAIL_DEFAULT_SENDER'] = 'garyaxelmuliyono@gmail.com'
+
+mail = Mail(app)
 
 #end of global environments===============================
 
@@ -127,7 +144,6 @@ app.jinja_env.filters['format_currency'] = format_currency
 def serve_image(filename):
     image_path = os.path.join('static', 'images', filename)
     max_file_size = 1 * 1024 * 1024
-    print(image_path)
     if os.path.getsize(image_path) > max_file_size:
         processed_image_path = process_image(image_path)
     else:
@@ -138,7 +154,6 @@ def serve_image(filename):
 def serve_cover_image(filename):
     image_path = os.path.join('static', 'cover', filename)
     max_file_size = 2 * 1024 * 1024
-    print(image_path)
     if os.path.getsize(image_path) > max_file_size:
         processed_image_path = process_image(image_path)
     else:
@@ -148,8 +163,6 @@ def serve_cover_image(filename):
 #end of image processing routes===========================
 
 
-
-#
 @app.route('/',methods=['GET'])
 def root():
     return render_template('home.html', cover_image_urls = cover_image_urls)
@@ -162,23 +175,36 @@ def signature():
 
 @app.route('/wheretobuy',methods=['GET'])
 def wheretobuy():
-    return render_template('wheretobuy.html')
+    return render_template('wheretobuy.html', cover_image_urls = cover_image_urls)
 
-@app.route('/contactus',methods=['GET'])
+@app.route('/contactus',methods=['GET','POST'])
 def contactus():
-    return render_template('contactus.html')
+    if request.method == 'GET':
+        return render_template('contactus.html', cover_image_urls = cover_image_urls)
+    else:
+        full_name = request.form.get('fullName')
+        email = request.form.get('email')
+        message = request.form['message']
+        subject = 'Contact Form Submission from Cookies Kingdom Website'
+        body = f'Name: {full_name}\nEmail: {email}\nMessage: {message}'
+        msg = Message(subject, recipients=['garyaxelmuliyono@gmail.com','monikamuliyono1@gmail.com'])
+        msg.body = body
+        try:
+            mail.send(msg)
+            response = {
+                'script': 'document.getElementById("contact-form").reset(); alert("Message submitted successfully!");'
+            }
+            return jsonify(response)
+        except Exception as e:
+            print(e)
+            response = {
+                'script': f'alert("Error sending email: {str(e)}");'
+            }
+            return jsonify(response)
 
+@app.route('/certifications',methods=['GET'])
+def certifications():
+    return render_template('certifications.html',cover_image_urls = cover_image_urls)
 
-#TODO
-# Informasi produk kurang lengkap, bisa ditambah:
-# - Signature products: kastengel, nastar, sagu keju
-# - Cookies: nastar, kastengel, sagu keju, lidah kucing, kenari, choco chip, dll
-# - Hampers: lebaran, natal, chinese new year
-# - Snack: soesring, mieting, almond crispy
-# Ditambah menu sertifikasi yg kita punya: PIRT dan Halal
-# Ditambah menu produk kita bisa dibeli dimana saja:
-# - Store: Hoky, Ranch Market, Transmart, Lottemart, Chicco, Bilka, dll
-# - Online: Grab, Gojek, Shopee, Tokopedia (kl bisa kl di klik bisa langsung link ke online shop kita)
-# Contact us: ditambah IG & WA (kl di klik bisa langsung link ke IG/WA tsb)
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)

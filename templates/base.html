@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="/static/base.css" rel="stylesheet">
+    <link rel="icon" href="/static/images/icon.png" type="image/png">
   </head>
   <body>
     <div id="wrapper">
@@ -29,6 +30,9 @@
                         <li class="navbar-item">
                             <a href="/wheretobuy" class="nav-link">Where to Buy</a>
                         </li>
+                        <li class="navbar-item">
+                          <a href="/certifications" class="nav-link">Certifications</a>
+                      </li>
                         <li class="navbar-item">
                             <a href="/contactus" class="nav-link">Contact Us</a>
                         </li>
@@ -78,8 +82,8 @@
                 <div class="col-md-9 footer-text">
                     <!-- Left side content: Information -->
                     <h3>Cookies Kingdom</h3>
-                    <p>Raya Wiguna Tengah 40 Surabaya</p>
-                    <p>Contact: (+62) 8123145489<br>Contact: (+62) 85815312145</p>
+                    <p>Raya Wiguna Tengah 40 Surabaya<br>
+                    Contact: (+62) 8123145489<br>Contact: (+62) 85815312145</p>
                 </div>
                 <div class="col-md-3 d-flex align-items-center justify-content-end">
                     <!-- Right side content: Logos -->
@@ -117,6 +121,33 @@
       var imageSrc = button.getAttribute('data-src'); // Extract info from data-* attributes
       modalImage.src = imageSrc; // Set the image source
     });
+    
+  </script>
+  <script>
+    $(document).ready(function() {
+    // Hide the container initially
+    $('.container').hide();
+
+    // Function to check if all images are loaded
+    function imagesLoaded() {
+      var images = $('.container img');
+      var totalImages = images.length;
+      var imagesLoaded = 0;
+
+      images.on('load', function() {
+        imagesLoaded++;
+
+        // Check if all images are loaded
+        if (imagesLoaded === totalImages) {
+          // Show the container once all images are loaded
+          $('.container').show();
+        }
+      });
+    }
+
+    // Call the imagesLoaded function
+    imagesLoaded();
+  });
   </script>
   
 </html>
